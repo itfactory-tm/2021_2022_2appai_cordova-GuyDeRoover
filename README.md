@@ -22,11 +22,11 @@ The API used to find a select wallpapers: https://wallhaven.cc/help/api
 ## Plugins used
 
 Plugin to show selected wallpaper in full size:
-https://ionicframework.com/docs/native/full-screen-image
+https://ionicframework.com/docs/native/full-screen-image.
 Plugin to print a certain wallpaper:
-https://ionicframework.com/docs/native/printer
+https://ionicframework.com/docs/native/printer.
 Plugin to create your own custom wallpapers:
-https://www.npmjs.com/package/cordova-plugin-konnect-camera
+https://www.npmjs.com/package/cordova-plugin-konnect-camera.
 
 
 ## Tip: GitHub Markdown
