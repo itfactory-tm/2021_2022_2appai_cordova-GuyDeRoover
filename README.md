@@ -20,7 +20,7 @@ You will also be able to create your own custom wallpapers by taking pictures wi
 If you would wanna print a certain wallpaper to hang in your room for example, then you can do that too. 
 One tab will be used to look for wallpapers, one tab for your saved wallpapers and the last tab to change settings, create wallpapers, print, etc.
 
-API used to find a select wallpapers: https://wallhaven.cc/help/api
+API used to find wallpapers: https://wallhaven.cc/help/api
 
 
 
