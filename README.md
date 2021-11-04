@@ -22,16 +22,14 @@ One tab will be used to look for wallpapers, one tab for your saved wallpapers a
 
 API used to find wallpapers: https://wallhaven.cc/help/api
 
-
 ## Plugins used
 
-- [cordova-plugin-whitelist](https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-whitelist/)  
-Plugin to show selected wallpaper in full size.
-https://ionicframework.com/docs/native/full-screen-image
-Plugin to print a certain wallpaper.
-https://ionicframework.com/docs/native/printer
-Plugin to create your own custom wallpapers.
-https://www.npmjs.com/package/cordova-plugin-konnect-camera
+Plugin to show selected wallpaper in full size:
+https://ionicframework.com/docs/native/full-screen-image.
+Plugin to print a certain wallpaper:
+https://ionicframework.com/docs/native/printer.
+Plugin to create your own custom wallpapers:
+https://www.npmjs.com/package/cordova-plugin-konnect-camera.
 
 
 ## Tip: GitHub Markdown
