@@ -10,13 +10,17 @@
 
 ## Short description of your app
 
-The idea is the create an application that gives you the possibility to choose from a wide range of wallpapers saved in a database when connected to the internet (see API down below).
+The idea is the create an application that gives you the possibility to choose from a wide range of wallpapers.
+The wallpapers are from wallhavens database (see API down below).
+You will be able to sort and search wallpapers by name or tags.
 If you find a wallpaper that you like you can set it as your phones background with a single press of a button.
-If there are wallpapers that you like you can mark them as favorite so they won't get lost.
+If there are certain wallpapers that you really like, you can mark them as favorite so they won't get lost.
 The wallpapers marked as favorite will be put in local storage so you can always use those wallpapers even without internet.
 You will also be able to create your own custom wallpapers by taking pictures with you camera.
-If you would wanna print a certain wallpaper to hang in your room you can do that too from your phone. 
-The API used to find a select wallpapers: https://wallhaven.cc/help/api
+If you would wanna print a certain wallpaper to hang in your room for example, then you can do that too. 
+One tab will be used to look for wallpapers, one tab for your saved wallpapers and the last tab to change settings, create wallpapers, print, etc.
+
+API used to find wallpapers: https://wallhaven.cc/help/api
 
 
 ## Plugins used

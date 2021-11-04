@@ -1,7 +1,32 @@
+/*NavBar*/
 a.brand-logo {
-    font-size: 1.2rem;
+    font-size: 1.5rem !important;
+    font-weight: bold;
+    text-shadow: 1px 1px black;
 }
+/*NavMenu*/
+.sidenav li a {
+    padding-bottom: 4rem;
+    border-bottom: lightgray 1px solid;
+}
+.sidenav a img {
+    width: 2.6rem;
+    margin-top: 0.7rem;
+}
+/*Body*/
+main h5 {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+main h5 img {
+    width: 3.5rem;
+    margin-right: 20px;
+}
+/*Wallpaper*/
 
-p {
-    text-align: justify;
-}
+/*Save*/
+
+/*Print*/
+
+/*App Info*/
