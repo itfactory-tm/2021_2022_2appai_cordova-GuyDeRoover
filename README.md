@@ -22,8 +22,6 @@ One tab will be used to look for wallpapers, one tab for your saved wallpapers a
 
 API used to find wallpapers: https://wallhaven.cc/help/api
 
-
-
 ## Plugins used
 
 Plugin to show selected wallpaper in full size:
