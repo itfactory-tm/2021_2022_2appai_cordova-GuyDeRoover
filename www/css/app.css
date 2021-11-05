@@ -30,3 +30,8 @@ main h5 img {
 /*Print*/
 
 /*App Info*/
+
+.off {
+    background-color: #dddddd !important;
+    color: #999999 !important;
+}

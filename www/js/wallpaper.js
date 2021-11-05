@@ -4,21 +4,69 @@ let Wallpaper = function() {
     //const searchwithAPI = `${wallhavenUrl}?apikey=${wallhavenKey}`
 
     let init = function() {
-
-        $('#test').click(function () {
+        //standaard waarden voor categories
+        let general = 100;
+        let anime = 10;
+        let people = 1;
+        //nakijken of er knoppen zijn enabled/disabled en waarden aanpassen
+        $('#general').click(function() {
+            if ($(this).hasClass('off')) {
+                /* code to do when disabled */
+                general = 100;
+                $('#general').removeClass('off');
+            } else {
+                /* code to do when enabling */
+                general = 0;
+                $('#general').addClass('off');
+            }
+        });
+        $('#anime').click(function() {
+            if ($(this).hasClass('off')) {
+                anime = 10;
+                $('#anime').removeClass('off');
+            } else {
+                anime = 0;
+                $('#anime').addClass('off');
+            }
+        });
+        $('#people').click(function() {
+            if ($(this).hasClass('off')) {
+                people = 1;
+                $('#people').removeClass('off');
+            } else {
+                people = 0;
+                $('#people').addClass('off');
+            }
+        });
+        //wanneer we op de search knop drukken
+        $('#search').click(function () {
             //Maak het #wallpapers element leeg bij elke nieuwe zoekactie
             $('#wallpapers').empty()
-            //console.log('Button werkt!');
+            //waarden optellen voor categories
+            categories = general+anime+people;
+            //Foutcorrectie als value van categories onder 100 valt
+            if (categories === 0) {
+                categories = '000';
+            }
+            else if (categories === 1) {
+                categories = '001';
+            }
+            else if (categories === 10) {
+                categories = '010';
+            }
+            else if (categories === 11) {
+                categories = '011';
+            }
 
             //Maak een JSON-object met alle parameters
             const pars = {
-                q: 'anime', //q = query parameter for tagnames, id, @username, type, etc.
-                categories: '111', //general,anime,people => 1 is on, 0 is off
+                q: $('#search-text').val(), //q = query parameter for tagnames, id, @username, type, etc.
+                categories: categories, //general,anime,people => 1 is on, 0 is off
                 //purity: '110' //sfw,sketchy,nsfw => 1 is on, 0 is off (nsfw enkel met API key)
             }
 
             //Toon URL met query parameters in console
-            console.log('API call:', `${wallhavenUrl}?${$.param(pars)}`)
+            //console.log('API call:', `${wallhavenUrl}?${$.param(pars)}`)
 
             // Search MET API Key + static filters:
             //$.getJSON(searchwithAPI, pars, function (data) {
@@ -29,7 +77,7 @@ let Wallpaper = function() {
 
                     //Looping door de Array
                     for (i = 0; i < value.length; i = i +1) {
-                        console.log(value[i])
+                        //console.log(value[i])
 
                         //Variabele met de large wallpaper link
                         const image = value[i].thumbs.large
@@ -39,8 +87,6 @@ let Wallpaper = function() {
                         const category = value[i].category
 
                         //Plaats de afbeeldingen in het #wallpapers element
-                        //$('#wallpapers').append(`<img src='${current_img}' alt='wallpaper'>`)
-
                         $('#wallpapers').append(
                             `<div class="col s12">
                         <div class="card">
@@ -53,11 +99,7 @@ let Wallpaper = function() {
                                 <p>${resolution}</p>
                             </div>
                         </div>
-                    </div>`
-                        )
-
-
-
+                    </div>`)
                     }
                 });
             });
