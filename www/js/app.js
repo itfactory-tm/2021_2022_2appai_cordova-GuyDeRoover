@@ -15,5 +15,4 @@ function onDeviceReady() {
     Saved.init();
     Print.init();
     Info.init();
-    console.log('Device is ready');
 };

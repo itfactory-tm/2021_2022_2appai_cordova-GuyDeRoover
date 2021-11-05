@@ -3,6 +3,6 @@ let Saved = function() {
 
     };
     return {
-        init: init
+        init: init()
     };
-};
+}();
