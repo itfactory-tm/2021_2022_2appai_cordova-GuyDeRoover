@@ -4,59 +4,49 @@ let Wallpaper = function() {
     //const searchwithAPI = `${wallhavenUrl}?apikey=${wallhavenKey}`
 
     let init = function() {
+
         //standaard waarden voor categories
-        let general = 100;
-        let anime = 10;
-        let people = 1;
+        let general = '1';
+        let anime = '1';
+        let people = '1';
+
         //nakijken of er knoppen zijn enabled/disabled en waarden aanpassen
         $('#general').click(function() {
             if ($(this).hasClass('off')) {
                 /* code to do when disabled */
-                general = 100;
+                general = '1';
                 $('#general').removeClass('off');
             } else {
                 /* code to do when enabling */
-                general = 0;
+                general = '0';
                 $('#general').addClass('off');
             }
         });
         $('#anime').click(function() {
             if ($(this).hasClass('off')) {
-                anime = 10;
+                anime = '1';
                 $('#anime').removeClass('off');
             } else {
-                anime = 0;
+                anime = '0';
                 $('#anime').addClass('off');
             }
         });
         $('#people').click(function() {
             if ($(this).hasClass('off')) {
-                people = 1;
+                people = '1';
                 $('#people').removeClass('off');
             } else {
-                people = 0;
+                people = '0';
                 $('#people').addClass('off');
             }
         });
-        //wanneer we op de search knop drukken
-        $('#search').click(function () {
+
+        //Maak herbruikbare function
+        function show() {
             //Maak het #wallpapers element leeg bij elke nieuwe zoekactie
             $('#wallpapers').empty()
-            //waarden optellen voor categories
+            //waarde optellen voor categories
             categories = general+anime+people;
-            //Foutcorrectie als value van categories onder 100 valt
-            if (categories === 0) {
-                categories = '000';
-            }
-            else if (categories === 1) {
-                categories = '001';
-            }
-            else if (categories === 10) {
-                categories = '010';
-            }
-            else if (categories === 11) {
-                categories = '011';
-            }
 
             //Maak een JSON-object met alle parameters
             const pars = {
@@ -70,7 +60,8 @@ let Wallpaper = function() {
 
             // Search MET API Key + static filters:
             //$.getJSON(searchwithAPI, pars, function (data) {
-                //Search ZONDER API Key + custom filters:
+
+            //Search ZONDER API Key + custom filters:
             $.getJSON(wallhavenUrl, pars, function (data) {
 
                 $.each(data, function (index, value) {
@@ -78,7 +69,6 @@ let Wallpaper = function() {
                     //Looping door de Array
                     for (i = 0; i < value.length; i = i +1) {
                         //console.log(value[i])
-
                         //Variabele met de large wallpaper link
                         const image = value[i].thumbs.large
                         //Variabele met de resolutie
@@ -103,8 +93,20 @@ let Wallpaper = function() {
                     }
                 });
             });
+        }
+
+        // Geef wallpapers weer na het openen van de app
+        show()
+
+        //wanneer we op de search knop drukken
+        $('#search').click(function () {
+
+            //Geef nieuwe wallpapers weer aan de hand van zoektermen, na het klikken van 'search'.
+            show()
+
         });
     };
+
     return {
         init:init()
     };
