@@ -37,59 +37,34 @@
     <div class="container">
 
         <!-- Tab Wallpaper  -->
-        <div class="row spa" id="tabWallpaper">
-            <div class="col s12">
+        <div class="spa" id="tabWallpaper">
                 <div class="row">
                     <h5><img src="icon/picture.png" alt="wallpaper">Wallpapers</h5>
 
-                    <form class="nav-wrapper inline" action="">
-                        <div class="input-field">
+                    <div class="nav-wrapper inline">
+                        <div class=" input-field">
                             <input id="search-text" type="search" multiple placeholder="Search">
                             <label class="label-icon" for="search-text">
                             <i class="material-icons">search</i></label>
                             <i class="material-icons">close</i>
                         </div>
-
+                    </div>
                         <div>
                             <button id="general" class="col s3 btn-small green">General</button>
                             <button id="anime" class=" col s3 btn-small green">Anime</button>
                             <button id="people" class="col s3 btn-small green">People</button>
                             <button id="search" class="col s3 btn-small right orange">Search</button>
                         </div>
-                    </form>
-
-                    <!-- Test wallpapers -->
-<!--                    <div class="col s12">
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="https://th.wallhaven.cc/lg/l3/l3dd1r.jpg" alt="wallpaper">
-                                <span class="card-title ">anime</span>
-                            </div>
-                            <div class="card-content">
-                                <div class="right-align">
-                                    <span class="btn-small green">Download</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col s12">
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="https://th.wallhaven.cc/lg/l3/l3dd1r.jpg" alt="wallpaper">
-                                <span class="card-title">anime</span>
-                                <a class="btn-floating halfway-fab waves-effect waves-light green" href=""><i class="material-icons">add</i></a>
-                            </div>
-                            <div class="card-content">
-                                <p>2381x1920</p>
-                            </div>
-                        </div>
-                    </div>-->
-
-                    <!-- Element met alle wallpapers die werden gevonden -->
-                    <div class="col s12" id="wallpapers"></div>
                 </div>
-            </div>
+
+                <div class="row">
+                    <button id="test" class=" col s12 btn-small blue">Test knop!</button>
+                </div>
+
+                <div class="row">
+                    <!-- Element met alle wallpapers die werden gevonden -->
+                    <div class="col s12 no-padding" id="wallpapers"></div>
+                </div>
         </div>
 
         <!-- Tab Save -->
@@ -126,7 +101,7 @@
 </main>
 <script src="js/jquery.3.5.1min.js"></script>
 <script src="js/materialize.1.0.0.min.js"></script>
-<!--<script src="cordova.js"></script>-->
+<script src="cordova.js"></script>
 <script src="js/wallpaper.js"></script>
 <script src="js/saved.js"></script>
 <script src="js/print.js"></script>

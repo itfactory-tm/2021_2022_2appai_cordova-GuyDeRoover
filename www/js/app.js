@@ -1,7 +1,7 @@
 $(function(){
     document.addEventListener("deviceready", onDeviceReady, false);
 
-    $('.sidenav').sidenav();
+    //$('.sidenav').sidenav();
 
     $('.sidenav a').click(function() {
         $('.spa').hide();
@@ -15,4 +15,4 @@ function onDeviceReady() {
     Saved.init();
     Print.init();
     Info.init();
-};
+}
