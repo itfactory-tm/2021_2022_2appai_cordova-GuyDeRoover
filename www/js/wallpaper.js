@@ -1,4 +1,5 @@
 let Wallpaper = function() {
+
     const wallhavenUrl = "https://wallhaven.cc/api/v1/search"
     //const wallhavenKey = "6NyKaLrzoDa8kgW7zw93aDZ40bpf1hhT"
     //const searchwithAPI = `${wallhavenUrl}?apikey=${wallhavenKey}`
@@ -41,7 +42,7 @@ let Wallpaper = function() {
             }
         });
 
-        //Maak herbruikbare function
+        //Maak herbruikbare function voor wallpapers weer te geven
         function show() {
             //Maak het #wallpapers element leeg bij elke nieuwe zoekactie
             $('#wallpapers').empty()
@@ -56,7 +57,7 @@ let Wallpaper = function() {
             }
 
             //Toon URL met query parameters in console
-            //console.log('API call:', `${wallhavenUrl}?${$.param(pars)}`)
+            console.log('API call:', `${wallhavenUrl}?${$.param(pars)}`)
 
             // Search MET API Key + static filters:
             //$.getJSON(searchwithAPI, pars, function (data) {
@@ -65,25 +66,38 @@ let Wallpaper = function() {
             $.getJSON(wallhavenUrl, pars, function (data) {
 
                 $.each(data, function (index, value) {
-
                     //Looping door de Array
                     for (i = 0; i < value.length; i = i +1) {
                         //console.log(value[i])
-                        //Variabele met de large wallpaper link
-                        const image = value[i].thumbs.large
+                        //Variable met het path van de preview (URL)
+                        const preview = value[i].thumbs.large
+                        //Variabele met het path van de full size image/wallpaper (URL)
+                        const image = value[i].path
                         //Variabele met de resolutie
                         const resolution = value[i].resolution
                         //Variabele met de categorie
                         const category = value[i].category
 
+
+                        // photoviewer opties (plugin) kan ook gewoon onclick"window.open({image})" doen maar dat is dan zonder plugin?
+                        let options = {
+                            share: true, // default is false
+                            closeButton: false, // default is true
+                            copyToReference: true, // default is false
+                            headers: '',  // If this is not provided, an exception will be triggered
+                            piccasoOptions: { } // If this is not provided, an exception will be triggered
+                        };
+                        //    PhotoViewer.show('https://w.wallhaven.cc/full/y8/wallhaven-y8936k.png', 'Optional Title', viewerOptions);
+
+
                         //Plaats de afbeeldingen in het #wallpapers element
                         $('#wallpapers').append(
-                            `<div class="col s12">
+                            `<div class="col s12 no-padding">
                         <div class="card">
                             <div class="card-image">
-                                <img src="${image}" alt="wallpaper">
+                                <img  src="${preview}"  alt="preview${[i]}" onclick="PhotoViewer.show('${image}', '${resolution}')" role="button" tabindex="${i}">
                                 <span class="card-title">${category}</span>
-                                <a class="btn-floating halfway-fab waves-effect waves-light green" href="${image}"><i class="material-icons">add</i></a>
+                                <a class="btn-floating halfway-fab waves-effect waves-light green" href="${image}"><i class="material-icons">star_border</i></a>
                             </div>
                             <div class="card-content">
                                 <p>${resolution}</p>
@@ -103,9 +117,27 @@ let Wallpaper = function() {
 
             //Geef nieuwe wallpapers weer aan de hand van zoektermen, na het klikken van 'search'.
             show()
-
         });
+
+        /*window.onclick = e => {
+            alert(e.target.tagname);
+        }*/
+
+        $('img[alt="preview0"]').click(function () {
+           alert('werkt')
+        });
+
+
+        $('#test').click(function () {
+
+
+
+        })
     };
+
+    //jpg: https://w.wallhaven.cc/full/8o/wallhaven-8oj6y2.jpg
+    //png: https://w.wallhaven.cc/full/y8/wallhaven-y8936k.png
+
 
     return {
         init:init()
