@@ -1,7 +1,7 @@
 $(function(){
     document.addEventListener("deviceready", onDeviceReady, false);
 
-    //$('.sidenav').sidenav();
+    $('.sidenav').sidenav();
 
     $('.sidenav a').click(function() {
         $('.spa').hide();
@@ -11,8 +11,8 @@ $(function(){
 });
 
 function onDeviceReady() {
-    Wallpaper.init();
-    Saved.init();
+    Search.init();
+    Save.init();
     Print.init();
     Info.init();
 }
