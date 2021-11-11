@@ -1,4 +1,4 @@
-let Wallpaper = function() {
+let Search = function() {
 
     const wallhavenUrl = "https://wallhaven.cc/api/v1/search"
     //const wallhavenKey = "6NyKaLrzoDa8kgW7zw93aDZ40bpf1hhT"
@@ -46,8 +46,10 @@ let Wallpaper = function() {
         function show() {
             //Maak het #wallpapers element leeg bij elke nieuwe zoekactie
             $('#wallpapers').empty()
+            //Lege Array voor te downloade URL's
+            const urlList = [];
             //waarde optellen voor categories
-            categories = general+anime+people;
+            const categories = general+anime+people;
 
             //Maak een JSON-object met alle parameters
             const pars = {
@@ -64,11 +66,9 @@ let Wallpaper = function() {
 
             //Search ZONDER API Key + custom filters:
             $.getJSON(wallhavenUrl, pars, function (data) {
-
+                //Looping door de Array
                 $.each(data, function (index, value) {
-                    //Looping door de Array
-                    for (i = 0; i < value.length; i = i +1) {
-                        //console.log(value[i])
+                    for (i = 0; i < value.length; i = i + 1) {
                         //Variable met het path van de preview (URL)
                         const preview = value[i].thumbs.large
                         //Variabele met het path van de full size image/wallpaper (URL)
@@ -78,66 +78,63 @@ let Wallpaper = function() {
                         //Variabele met de categorie
                         const category = value[i].category
 
-
-                        // photoviewer opties (plugin) kan ook gewoon onclick"window.open({image})" doen maar dat is dan zonder plugin?
-                        let options = {
-                            share: true, // default is false
-                            closeButton: false, // default is true
-                            copyToReference: true, // default is false
-                            headers: '',  // If this is not provided, an exception will be triggered
-                            piccasoOptions: { } // If this is not provided, an exception will be triggered
-                        };
-                        //    PhotoViewer.show('https://w.wallhaven.cc/full/y8/wallhaven-y8936k.png', 'Optional Title', viewerOptions);
-
-
                         //Plaats de afbeeldingen in het #wallpapers element
                         $('#wallpapers').append(
                             `<div class="col s12 no-padding">
-                        <div class="card">
-                            <div class="card-image">
-                                <img  src="${preview}"  alt="preview${[i]}" onclick="PhotoViewer.show('${image}', '${resolution}')" role="button" tabindex="${i}">
-                                <span class="card-title">${category}</span>
-                                <a class="btn-floating halfway-fab waves-effect waves-light green" href="${image}"><i class="material-icons">star_border</i></a>
-                            </div>
-                            <div class="card-content">
-                                <p>${resolution}</p>
-                            </div>
-                        </div>
-                    </div>`)
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img id="${[i]}" src="${preview}"  alt="preview" role="button">
+                                        <span class="card-title">${category}</span>
+                                        <a id="${[i]}" class="btn-set btn-floating halfway-fab waves-effect waves-light green" role="button"><i class="material-icons">star_border</i></a>
+                                    </div>
+                                    <div class="card-content">
+                                        <p>${resolution}</p>
+                                    </div>
+                                </div>
+                            </div>`
+                        );
+                        //Vul Array met de image source (URL)
+                        urlList.push(image);
                     }
                 });
             });
+
+            $(document).ready(function () {
+                // photoviewer opties (plug-in)
+                let options = {
+                    share: true, // default is false
+                    closeButton: true, // default is true
+                    copyToReference: true, // default is false
+                    headers: '',  // If this is not provided, an exception will be triggered
+                    piccasoOptions: { } // If this is not provided, an exception will be triggered
+                };
+
+                //Wanneer er op de img wordt geklikt open full image preview
+                $(document).undelegate('img', 'click').delegate('img', 'click', function () {
+                    const url = urlList[$(this).attr('id')];
+                    const title = $(this).parent().siblings().children()[0].innerText;
+                    PhotoViewer.show(url, title, options);
+                });
+
+                //Wanneer er op de cards knop wordt gedrukt zet als wallpaper
+                $(document).undelegate('.btn-set', 'click').delegate('.btn-set', 'click', function () {
+                    alert($(this).attr('id'));
+                });
+            });
+
+            $('#test').unbind().click(function () {
+                console.log('Op test gedrukt!');
+            });
         }
 
+        //wanneer we op de search knop drukken => nieuwe wallpapers weergeven
+        $('#search').unbind().click(function () {
+            show();
+        });
+
         // Geef wallpapers weer na het openen van de app
-        show()
-
-        //wanneer we op de search knop drukken
-        $('#search').click(function () {
-
-            //Geef nieuwe wallpapers weer aan de hand van zoektermen, na het klikken van 'search'.
-            show()
-        });
-
-        /*window.onclick = e => {
-            alert(e.target.tagname);
-        }*/
-
-        $('img[alt="preview0"]').click(function () {
-           alert('werkt')
-        });
-
-
-        $('#test').click(function () {
-
-
-
-        })
+        show();
     };
-
-    //jpg: https://w.wallhaven.cc/full/8o/wallhaven-8oj6y2.jpg
-    //png: https://w.wallhaven.cc/full/y8/wallhaven-y8936k.png
-
 
     return {
         init:init()
