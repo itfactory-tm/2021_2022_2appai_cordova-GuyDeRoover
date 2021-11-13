@@ -28,7 +28,7 @@
     <!-- Fixed sideNav -->
     <ul id="nav-mobile" class="sidenav">
         <li><a href="#!" data-show="tabWallpaper"><i class="material-icons"><img src="icon/picture.png" alt="Picture"></i>Search</a></li>
-        <li><a href="#!" data-show="tabSaved"><i class="material-icons"><img src="icon/diskette.png" alt="Save"></i>Gallery</a></li>
+        <li><a href="#!" data-show="tabSaved"><i class="material-icons"><img src="icon/diskette.png" alt="Favorite"></i>Gallery</a></li>
         <li><a href="#!" data-show="tabPrint"><i class="material-icons"><img src="icon/printer.png" alt="Print"></i>Print</a></li>
         <li><a href="#!" data-show="tabInfo"><i class="material-icons"><img src="icon/info.png" alt="Info"></i>App Info</a></li>
     </ul>
@@ -38,36 +38,49 @@
 
         <!-- Tab Search  -->
         <div class="spa" id="tabWallpaper">
-                <div class="row">
-                    <h5><img src="icon/picture.png" alt="wallpaper">Wallpapers</h5>
+            <div class="row">
+                <h5><img src="icon/picture.png" alt="wallpaper">Wallpapers</h5>
 
-                    <div class="nav-wrapper inline">
-                        <div class=" input-field">
-                            <input id="search-text" type="search" multiple placeholder="Search">
-                            <label class="label-icon" for="search-text">
+                <div class="nav-wrapper inline">
+                    <div class=" input-field">
+                        <input id="search-text" type="search" multiple placeholder="Search...">
+                        <label class="label-icon" for="search-text">
                             <i class="material-icons">search</i></label>
-                            <i class="material-icons">close</i>
-                        </div>
+                        <i class="material-icons">close</i>
                     </div>
-                        <div>
-                            <button id="general" class="col s3 btn-small green">General</button>
-                            <button id="anime" class=" col s3 btn-small green">Anime</button>
-                            <button id="people" class="col s3 btn-small green">People</button>
-                            <button id="search" class="col s3 btn-small right orange">Search</button>
-                        </div>
                 </div>
+                <div>
+                    <button id="general" class="col s3 btn-small green">General</button>
+                    <button id="anime" class=" col s3 btn-small green">Anime</button>
+                    <button id="people" class="col s3 btn-small green">People</button>
+                    <button id="search" class="col s3 btn-small right orange">Search</button>
+                </div>
+            </div>
 
-                <div class="row">
-                    <button id="test" class=" col s12 btn-small blue">Test knop!</button>
-                </div>
+            <div class="row">
+                <button id="test" class=" col s12 btn-small blue">Test knop!</button>
+            </div>
 
-                <div class="row">
-                    <!-- Element met alle wallpapers die werden gevonden -->
-                    <div class="col s12 no-padding" id="wallpapers"></div>
-                </div>
+            <div class="row">
+                <!-- Element met alle wallpapers die werden gevonden -->
+                <div class="col s12 no-padding" id="wallpapers"></div>
+            </div>
+
+            <!--<div class="center-align">
+                &lt;!&ndash; Element voor pagination&ndash;&gt;
+                <ul class="pagination">
+                    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                    <li class="active"><a href="#!">1</a></li>
+                    <li class="waves-effect"><a>2</a></li>
+                    <li class="waves-effect"><a>3</a></li>
+                    <li class="waves-effect"><a>4</a></li>
+                    <li class="waves-effect"><a>5</a></li>
+                    <li class="waves-effect"><a><i class="material-icons">chevron_right</i></a></li>
+                </ul>
+            </div>-->
         </div>
 
-        <!-- Tab Save -->
+        <!-- Tab Favorite -->
         <div class="row spa" id="tabSaved">
             <div class="col s12">
                 <h5><img src="icon/diskette.png" alt="save">Gallery</h5>
@@ -103,7 +116,7 @@
 <script src="js/materialize.1.0.0.min.js"></script>
 <script src="cordova.js"></script>
 <script src="js/search.js"></script>
-<script src="js/save.js"></script>
+<script src="js/favorite.js"></script>
 <script src="js/print.js"></script>
 <script src="js/info.js"></script>
 <script defer src="js/app.js"></script>

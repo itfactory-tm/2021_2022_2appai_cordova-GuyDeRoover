@@ -1,4 +1,4 @@
-let Save = function() {
+let Favorite = function(fileurl) {
     let init = function() {
 
     };

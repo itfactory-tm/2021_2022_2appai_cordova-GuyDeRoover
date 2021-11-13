@@ -12,7 +12,7 @@ $(function(){
 
 function onDeviceReady() {
     Search.init();
-    Save.init();
+    Favorite.init();
     Print.init();
     Info.init();
 }
