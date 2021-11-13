@@ -64,7 +64,7 @@ let Search = function() {
                 function rndInt() {
                     return Math.floor(1000 + Math.random() * 9000)
                 }
-                const filename = "Wallmania"+rndInt()+"-"+rndInt()+".png";
+                const filename = "Wallmania"+rndInt()+"-"+rndInt()+"-"+rndInt()+".png";
                 const DataBlob = blob;
                 window.resolveLocalFileSystemURL(folderpath, function (dir) {
                     dir.getFile(filename, {
