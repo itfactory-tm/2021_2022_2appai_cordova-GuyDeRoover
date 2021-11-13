@@ -194,8 +194,7 @@ let Search = function() {
                     const url = urlList[$(this).siblings('img').attr('id')];
                     switch (confirm('Download image to gallery?')) {
                         case true:
-                            DownloadToDevice(url);
-                            alert('Download complete ;)');
+                            DownloadToDevice(url);                          
                             break;
                         case false:
                             alert('Download canceled :(')
