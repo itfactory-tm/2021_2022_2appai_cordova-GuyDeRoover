@@ -24,8 +24,15 @@ main h5 img {
     margin-right: 20px;
 }
 /*Search*/
+.btn-fav {
+    right: 120px !important;
+}
 
-/*Save*/
+.btn-save {
+    right: 72px !important;
+}
+
+/*Favorite*/
 
 /*Print*/
 
