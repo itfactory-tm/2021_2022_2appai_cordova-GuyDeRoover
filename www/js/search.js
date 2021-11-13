@@ -183,7 +183,7 @@ let Search = function() {
                             alert('saved');
                             break;
                         case false:
-                            alert('no save')
+                            alert('no save');
                             break;
                     }*/
                     //alert($(this).siblings('img').attr('id'));
@@ -197,7 +197,8 @@ let Search = function() {
                             DownloadToDevice(url);                          
                             break;
                         case false:
-                            alert('Download canceled :(')
+                            alert('Download canceled :(');
+                            break;
                     }
                 });
 
@@ -207,13 +208,14 @@ let Search = function() {
                     switch (confirm('Set image as wallpaper?')) {
                         case true:
                             toDataURL(url, function (dataUrl) {
-                                const base64 = dataUrl.split(',')[1]
+                                const base64 = dataUrl.split(',')[1];
                                 window.plugins.wallpaper.setImageBase64(base64);
                                 alert('Done, wallpaper has been set ;)');
                             });
                             break;
                         case false:
-                            alert('Canceled, setting wallpaper :(')
+                            alert('Canceled, setting wallpaper :(');
+                            break;
                     }
                 });
 
