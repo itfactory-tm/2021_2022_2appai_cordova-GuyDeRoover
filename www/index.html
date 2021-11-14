@@ -10,6 +10,7 @@
     <style>
         .spa { display: none; }
         #tabWallpaper { display: block; }
+        .pagination { display: none; }
     </style>
 </head>
 <body>
@@ -28,7 +29,7 @@
     <!-- Fixed sideNav -->
     <ul id="nav-mobile" class="sidenav">
         <li><a href="#!" data-show="tabWallpaper"><i class="material-icons"><img src="icon/picture.png" alt="Picture"></i>Search</a></li>
-        <li><a href="#!" data-show="tabSaved"><i class="material-icons"><img src="icon/diskette.png" alt="Favorite"></i>Gallery</a></li>
+        <li><a href="#!" data-show="tabSaved"><i class="material-icons"><img src="icon/heart.png" alt="Favorite"></i>Favorites</a></li>
         <li><a href="#!" data-show="tabPrint"><i class="material-icons"><img src="icon/printer.png" alt="Print"></i>Print</a></li>
         <li><a href="#!" data-show="tabInfo"><i class="material-icons"><img src="icon/info.png" alt="Info"></i>App Info</a></li>
     </ul>
@@ -36,7 +37,7 @@
 <main>
     <div class="container">
 
-        <!-- Tab Search  -->
+        <!-- Tab Main  -->
         <div class="spa" id="tabWallpaper">
             <div class="row">
                 <h5><img src="icon/picture.png" alt="wallpaper">Wallpapers</h5>
@@ -66,25 +67,37 @@
                 <div class="col s12 no-padding" id="wallpapers"></div>
             </div>
 
-            <!--<div class="center-align">
-                &lt;!&ndash; Element voor pagination&ndash;&gt;
+            <div id="pag" class="center-align">
                 <ul class="pagination">
-                    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                    <li class="active"><a href="#!">1</a></li>
+                    <li class="disabled"><a><i class="material-icons">chevron_left</i></a></li>
+                    <li class="waves-effect active green"><a>1</a></li>
                     <li class="waves-effect"><a>2</a></li>
                     <li class="waves-effect"><a>3</a></li>
                     <li class="waves-effect"><a>4</a></li>
                     <li class="waves-effect"><a>5</a></li>
-                    <li class="waves-effect"><a><i class="material-icons">chevron_right</i></a></li>
+                    <li class="disabled"><a><i class="material-icons">chevron_right</i></a></li>
                 </ul>
-            </div>-->
+            </div>
         </div>
 
-        <!-- Tab Favorite -->
+        <!-- Tab Favorites -->
         <div class="row spa" id="tabSaved">
             <div class="col s12">
-                <h5><img src="icon/diskette.png" alt="save">Gallery</h5>
+                <h5><img src="icon/heart.png" alt="save">Favorites</h5>
             </div>
+
+            <div class="row">
+                <div class="col s12 no-padding">
+                    <!-- Dummy task-->
+                    <ul id="favorites" class="collection">
+                        <li class="collection-item avatar">
+                            <i class="material-icons circle red deleteTask" data-task="0">delete_forever</i>
+                            <div class="title" data-task="0" contenteditable>${url}</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
 
         <!-- Tab Print -->
@@ -115,7 +128,7 @@
 <script src="js/jquery.3.5.1min.js"></script>
 <script src="js/materialize.1.0.0.min.js"></script>
 <script src="cordova.js"></script>
-<script src="js/search.js"></script>
+<script src="js/main.js"></script>
 <script src="js/favorite.js"></script>
 <script src="js/print.js"></script>
 <script src="js/info.js"></script>

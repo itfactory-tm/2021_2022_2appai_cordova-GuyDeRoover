@@ -1,4 +1,4 @@
-let Search = function() {
+let Main = function() {
     const wallhavenUrl = "https://wallhaven.cc/api/v1/search"
     //const wallhavenKey = "6NyKaLrzoDa8kgW7zw93aDZ40bpf1hhT"
     //const searchwithAPI = `${wallhavenUrl}?apikey=${wallhavenKey}`
@@ -9,6 +9,8 @@ let Search = function() {
         let general = '1';
         let anime = '1';
         let people = '1';
+        const originalPagination = $('#pag').html();
+        //let _favorites = ['Dummy task'];
 
         //nakijken of er knoppen zijn enabled/disabled en waarden aanpassen
         $('#general').click(function() {
@@ -100,7 +102,7 @@ let Search = function() {
         }
 
         //Herbruikbare function voor wallpapers weer te geven
-        function show() {
+        function show(page) {
             //Maak het #wallpapers element leeg bij elke nieuwe zoekactie
             $('#wallpapers').empty()
             //Lege Array voor te downloaden URL's
@@ -112,37 +114,59 @@ let Search = function() {
             const pars = {
                 q: $('#search-text').val(), //q = query parameter for tagnames, id, @username, type, etc.
                 categories: categories, //general,anime,people => 1 is on, 0 is off
-                //purity: '110' //sfw,sketchy,nsfw => 1 is on, 0 is off (nsfw enkel met API key)
+                purity: '100', //sfw,sketchy,nsfw => 1 is on, 0 is off (nsfw enkel met API key)
+                page: page,
             };
 
             //Toon URL met query parameters in console
             console.log('API call:', `${wallhavenUrl}?${$.param(pars)}`)
 
-            // Search MET API Key + static filters:
+            // Main MET API Key + static filters:
             //$.getJSON(searchwithAPI, pars, function (data) {
 
-            //Search ZONDER API Key + custom filters:
+            //Main ZONDER API Key + custom filters:
             $.getJSON(wallhavenUrl, pars, function (data) {
-                //Looping door de Array
                 $.each(data, function (index, value) {
-                    for (i = 0; i < value.length; i = i + 1) {
-                        //Variable met het path van de preview (URL)
-                        const preview = value[i].thumbs.large
-                        //Variabele met het path van de full size image/wallpaper (URL)
-                        const image = value[i].path
-                        //Variabele met de resolutie
-                        const resolution = value[i].resolution
-                        //Variabele met de categorie
-                        const category = value[i].category
 
-                        //Plaats de afbeeldingen in het #wallpapers element
-                        $('#wallpapers').append(
-                            `<div class="col s12 no-padding">
+                    //Variabele met de current page
+                    const currentPage = value.current_page;
+                    //Variabele met de max aantal pages
+                    const lastPage = value.last_page;
+                    //Variabele met aantal zoekresultaten
+                    const totalFind = value.total;
+                    //console.log(currentPage, lastPage, totalFind)
+
+                    if (totalFind === 0) {
+                        $('.pagination').hide();
+                        alert('No search results were found!');
+                    }
+                    else {
+                        if (totalFind <= 24) {
+                            $('.pagination').hide();
+                        }
+                        else {
+                            $('.pagination').show();
+                        }
+
+                        //Looping door de Array
+                        for (i = 0; i < value.length; i = i + 1) {
+                            //Variable met het path van de preview (URL)
+                            const preview = value[i].thumbs.large;
+                            //Variabele met het path van de full size image/wallpaper (URL)
+                            const image = value[i].path;
+                            //Variabele met de resolutie
+                            const resolution = value[i].resolution;
+                            //Variabele met de categorie
+                            const category = value[i].category;
+
+                            //Plaats de afbeeldingen in het #wallpapers element
+                            $('#wallpapers').append(
+                                `<div class="col s12 no-padding">
                                 <div class="card">
                                     <div class="card-image">
-                                        <img id="${[i]}" src="${preview}"  alt="preview" role="button">
+                                        <img id="${[i]}" class="preview" src="${preview}"  alt="preview" role="button">
                                         <span class="card-title">${category}</span>
-                                        <a class="btn-fav btn-floating halfway-fab waves-effect waves-light green" role="button"><i class="material-icons">star_border</i></a>
+                                        <a class="btn-fav btn-floating halfway-fab waves-effect waves-light green" role="button"><i class="material-icons">favorite_border</i></a>
                                         <a class="btn-save btn-floating halfway-fab waves-effect waves-light green" role="button"><i class="material-icons">file_download</i></a>
                                         <a class="btn-set btn-floating halfway-fab waves-effect waves-light green" role="button"><i class="material-icons">wallpaper</i></a>
                                     </div>
@@ -151,11 +175,13 @@ let Search = function() {
                                     </div>
                                 </div>
                             </div>`
-                        );
-                        //Vul Array met de image source (URL)
-                        urlList.push(image);
+                            );
+                            //Vul Array met de image source (URL)
+                            urlList.push(image);
+                        }
                     }
                 });
+                //console.log(urlList)
             });
 
             $(document).ready(function () {
@@ -169,29 +195,15 @@ let Search = function() {
                 };
 
                 //Wanneer er op de img wordt geklikt => open full image preview (plug-in)
-                $(document).undelegate('img', 'click').delegate('img', 'click', function () {
+                $(document).undelegate('img.preview', 'click').delegate('img.preview', 'click', function () {
                     const url = urlList[$(this).attr('id')];
                     const title = $(this).parent('div.card-image').siblings('div.card-content').children('p')[0].innerText;
                     PhotoViewer.show(url, title, options);
                 });
 
-                //Wanneer er op favorite wordt geklikt
-                $(document).undelegate('.btn-fav', 'click').delegate('.btn-fav', 'click', function () {
-                    const url = urlList[$(this).siblings('img').attr('id')];
-                    /*switch (confirm('Favorite image in favorites?')) {
-                        case true:
-                            alert('saved');
-                            break;
-                        case false:
-                            alert('no save');
-                            break;
-                    }*/
-                    //alert($(this).siblings('img').attr('id'));
-                });
-
                 //Wanneer er op save wallpaper wordt geklikt
                 $(document).undelegate('.btn-save', 'click').delegate('.btn-save', 'click', function () {
-                    const url = urlList[$(this).siblings('img').attr('id')];
+                    const url = urlList[$(this).siblings('img.preview').attr('id')];
                     switch (confirm('Download image to gallery?')) {
                         case true:
                             DownloadToDevice(url);                          
@@ -204,7 +216,7 @@ let Search = function() {
 
                 //Wanneer er op set wallpaper wordt geklikt
                 $(document).undelegate('.btn-set', 'click').delegate('.btn-set', 'click', function () {
-                    const url = urlList[$(this).siblings('img').attr('id')];
+                    const url = urlList[$(this).siblings('img.preview').attr('id')];
                     switch (confirm('Set image as wallpaper?')) {
                         case true:
                             toDataURL(url, function (dataUrl) {
@@ -219,23 +231,52 @@ let Search = function() {
                     }
                 });
 
+                //Wanneer er op favorite wordt geklikt (Local storage)
+                $(document).undelegate('.btn-fav', 'click').delegate('.btn-fav', 'click', function () {
+                    const url = urlList[$(this).siblings('img.preview').attr('id')];
+                    switch (confirm('Favorite image in favorites?')) {
+                        case true:
+
+                            toDataURL(url, function (dataUrl) {
+                                const base64 = dataUrl.split(',')[1];
+                            });
+                            alert('saved');
+                            break;
+                        case false:
+                            alert('no save');
+                            break;
+                    }
+                });
+
             });
 
+            //test knop
             $('#test').unbind().click(function () {
 
+            });
+
+            $('ul.pagination').children('li.waves-effect').unbind().click(function () {
+                const pageNumber = $(this).children('a')[0].innerText;
+                const activePage = document.getElementsByClassName('active', 'green')[1];
+                if (pageNumber >= 1 && pageNumber <= 5) {
+                    activePage.classList.remove('active', 'green');
+                    $(this).addClass('active'); $(this).addClass('green');
+                    show(pageNumber);
+                }
             });
         }
 
         // Geef wallpapers weer na het openen van de app
-        show();
+        show(1);
 
         //wanneer we op de search knop drukken => nieuwe wallpapers weergeven
         $('#search').unbind().click(function () {
-            show();
+            $('#pag').html(originalPagination);
+            show(1);
         });
     };
 
     return {
-        init:init()
+        init: init,
     };
 }();
