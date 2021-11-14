@@ -3,6 +3,6 @@ let Info = function() {
 
     };
     return {
-        init: init()
+        init: init,
     };
 }();

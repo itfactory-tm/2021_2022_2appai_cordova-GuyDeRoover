@@ -3,6 +3,6 @@ let Print = function() {
 
     };
     return {
-        init: init()
+        init: init,
     };
 }();
