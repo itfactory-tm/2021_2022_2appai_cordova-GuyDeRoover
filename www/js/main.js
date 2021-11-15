@@ -10,7 +10,6 @@ let Main = function() {
         let anime = '1';
         let people = '1';
         const originalPagination = $('#pag').html();
-        //let _favorites = ['Dummy task'];
 
         //nakijken of er knoppen zijn enabled/disabled en waarden aanpassen
         $('#general').click(function() {
@@ -132,7 +131,7 @@ let Main = function() {
                     const currentPage = value.current_page;
                     //Variabele met de max aantal pages
                     const lastPage = value.last_page;
-                    //Variabele met aantal zoekresultaten
+                    //Variabele met totaal aantal zoekresultaten
                     const totalFind = value.total;
                     //console.log(currentPage, lastPage, totalFind)
 
