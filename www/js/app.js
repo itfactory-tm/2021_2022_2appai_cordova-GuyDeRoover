@@ -1,5 +1,6 @@
 $(function(){
     document.addEventListener("deviceready", onDeviceReady, false);
+    document.addEventListener("offline", onOffline, false);
 
     $('.sidenav').sidenav();
 
@@ -8,6 +9,10 @@ $(function(){
         $('#' + $(this).data('show')).show();
         $('.sidenav').sidenav('close');
     });
+
+    function onOffline() {
+        alert('Lost internet connection!')
+    }
 
     $('#addTask').click(function () {
         console.log('add a new task');
