@@ -24,7 +24,7 @@ main h5 img {
     margin-right: 20px;
 }
 /*Main*/
-.btn-fav {
+.btn-fav, .btn-delete {
     right: 120px !important;
 }
 
@@ -34,7 +34,7 @@ main h5 img {
 
 /*Favorite*/
 
-/*Print*/
+/*Setting*/
 
 /*App Info*/
 
