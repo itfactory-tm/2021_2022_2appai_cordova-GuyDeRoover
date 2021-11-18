@@ -3,6 +3,13 @@ let Main = function() {
     //const wallhavenKey = "6NyKaLrzoDa8kgW7zw93aDZ40bpf1hhT"
     //const searchwithAPI = `${wallhavenUrl}?apikey=${wallhavenKey}`
 
+    //Maak van de full image link een tweede link naar de preview size image
+    function remakeUrl(url) {
+        const newUrl = url.replace('w', 'th').replace('full', 'lg').replace('wallhaven-', '');
+        const pos = newUrl.lastIndexOf('.');
+        return newUrl.substring(0, pos) + '.jpg';
+    }
+
     let init = function() {
 
         //standaard waarden voor categories
@@ -102,10 +109,10 @@ let Main = function() {
 
         //Herbruikbare function voor wallpapers weer te geven
         function show(page) {
-            //Maak het #wallpapers element leeg bij elke nieuwe zoekactie
-            $('#wallpapers').empty()
-            //Lege Array voor te downloaden URL's
-            const urlList = [];
+            //Slaag selector op in variabele voor hergebruik
+            const wallpapers = $('#wallpapers');
+            //Maak het #wallpapers element leeg bij elke nieuwe zoekactie en hide page tot alles geladen is
+            wallpapers.empty().hide();
             //waarde optellen voor categories
             const categories = general+anime+people;
 
@@ -149,10 +156,8 @@ let Main = function() {
 
                         //Looping door de Array
                         for (i = 0; i < value.length; i = i + 1) {
-                            //Variable met het path van de preview (URL)
-                            const preview = value[i].thumbs.large;
                             //Variabele met het path van de full size image/wallpaper (URL)
-                            const image = value[i].path;
+                            const fullUrl = value[i].path;
                             //Variabele met de resolutie
                             const resolution = value[i].resolution;
                             //Variabele met de categorie
@@ -161,9 +166,9 @@ let Main = function() {
                             //Plaats de afbeeldingen in het #wallpapers element
                             $('#wallpapers').append(
                                 `<div class="col s12 no-padding">
-                                <div class="card">
+                                    <div class="card">
                                     <div class="card-image">
-                                        <img id="${[i]}" class="preview" src="${preview}"  alt="preview" role="button">
+                                        <img id="${[i]}" class="preview" src="${remakeUrl(fullUrl)}" alt="preview" data-fullUrl="${fullUrl}" role="button">
                                         <span class="card-title">${category}</span>
                                         <a class="btn-fav btn-floating halfway-fab waves-effect waves-light green" role="button"><i class="material-icons">favorite_border</i></a>
                                         <a class="btn-save btn-floating halfway-fab waves-effect waves-light green" role="button"><i class="material-icons">file_download</i></a>
@@ -175,85 +180,12 @@ let Main = function() {
                                 </div>
                             </div>`
                             );
-                            //Vul Array met de image source (URL)
-                            urlList.push(image);
                         }
                     }
                 });
-                //console.log(urlList)
             });
 
-            $(document).ready(function () {
-                // photoviewer opties (plug-in)
-                let options = {
-                    share: true, // default is false
-                    closeButton: true, // default is true
-                    copyToReference: true, // default is false
-                    headers: '',  // If this is not provided, an exception will be triggered
-                    piccasoOptions: { } // If this is not provided, an exception will be triggered
-                };
-
-                //Wanneer er op de img wordt geklikt => open full image preview (plug-in)
-                $(document).undelegate('img.preview', 'click').delegate('img.preview', 'click', function () {
-                    const url = urlList[$(this).attr('id')];
-                    const title = $(this).parent('div.card-image').siblings('div.card-content').children('p')[0].innerText;
-                    PhotoViewer.show(url, title, options);
-                });
-
-                //Wanneer er op save wallpaper wordt geklikt
-                $(document).undelegate('.btn-save', 'click').delegate('.btn-save', 'click', function () {
-                    const url = urlList[$(this).siblings('img.preview').attr('id')];
-                    switch (confirm('Download image to gallery?')) {
-                        case true:
-                            DownloadToDevice(url);                          
-                            break;
-                        case false:
-                            alert('Download canceled :(');
-                            break;
-                    }
-                });
-
-                //Wanneer er op set wallpaper wordt geklikt
-                $(document).undelegate('.btn-set', 'click').delegate('.btn-set', 'click', function () {
-                    const url = urlList[$(this).siblings('img.preview').attr('id')];
-                    switch (confirm('Set image as wallpaper?')) {
-                        case true:
-                            toDataURL(url, function (dataUrl) {
-                                const base64 = dataUrl.split(',')[1];
-                                window.plugins.wallpaper.setImageBase64(base64);
-                                alert('Done, wallpaper has been set ;)');
-                            });
-                            break;
-                        case false:
-                            alert('Canceled, setting wallpaper :(');
-                            break;
-                    }
-                });
-
-                //Wanneer er op favorite wordt geklikt (Local storage)
-                $(document).undelegate('.btn-fav', 'click').delegate('.btn-fav', 'click', function () {
-                    const url = urlList[$(this).siblings('img.preview').attr('id')];
-                    switch (confirm('Favorite image in favorites?')) {
-                        case true:
-
-                            toDataURL(url, function (dataUrl) {
-                                const base64 = dataUrl.split(',')[1];
-                            });
-                            alert('saved');
-                            break;
-                        case false:
-                            alert('no save');
-                            break;
-                    }
-                });
-
-            });
-
-            //test knop
-            $('#test').unbind().click(function () {
-
-            });
-
+            //Pagination
             $('ul.pagination').children('li.waves-effect').unbind().click(function () {
                 const pageNumber = $(this).children('a')[0].innerText;
                 const activePage = document.getElementsByClassName('active', 'green')[1];
@@ -263,7 +195,58 @@ let Main = function() {
                     show(pageNumber);
                 }
             });
+            //Laat elementen zien wanneer alles is geladen
+            wallpapers.show();
         }
+
+        $(document).ready(function () {
+
+            // photoviewer opties (plug-in)
+            let options = {
+                share: true, // default is false
+                closeButton: true, // default is true
+                copyToReference: true, // default is false
+                headers: '',  // If this is not provided, an exception will be triggered
+                piccasoOptions: { } // If this is not provided, an exception will be triggered
+            };
+
+            //Wanneer er op de image wordt geklikt
+            $(document).undelegate('img.preview', 'click').delegate('img.preview', 'click', function () {
+                const url = $(this).attr('data-fullUrl');
+                PhotoViewer.show(url, url, options);
+            })
+
+            //Wanneer er op save wallpaper wordt geklikt
+            $(document).undelegate('.btn-save', 'click').delegate('.btn-save', 'click', function () {
+                const url = $(this).siblings('img.preview').attr('data-fullUrl');
+                switch (confirm('Download image to gallery?')) {
+                    case true:
+                        DownloadToDevice(url);
+                }
+            });
+
+            //Wanneer er op set wallpaper wordt geklikt
+            $(document).undelegate('.btn-set', 'click').delegate('.btn-set', 'click', function () {
+                const url = $(this).siblings('img.preview').attr('data-fullUrl');
+                switch (confirm('Set image as wallpaper?')) {
+                    case true:
+                        toDataURL(url, function (dataUrl) {
+                            const base64 = dataUrl.split(',')[1];
+                            window.plugins.wallpaper.setImageBase64(base64);
+                            alert('Done, wallpaper has been set ;)');
+                        });
+                }
+            });
+
+            //Wanneer er op favorite wordt geklikt (Local storage)
+            $(document).undelegate('.btn-fav', 'click').delegate('.btn-fav', 'click', function () {
+                const url = $(this).siblings('img.preview').attr('data-fullUrl');
+                switch (confirm('Save wallpaper in favorites?')) {
+                    case true:
+                        Favorite.addFavorite(url);
+                }
+            });
+        });
 
         // Geef wallpapers weer na het openen van de app
         show(1);
@@ -277,5 +260,6 @@ let Main = function() {
 
     return {
         init: init,
+        //remakeUrl:remakeUrl,
     };
 }();

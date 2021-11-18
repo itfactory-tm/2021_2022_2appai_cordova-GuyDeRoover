@@ -1,4 +1,4 @@
-let Print = function() {
+let Setting = function() {
     let init = function() {
 
     };

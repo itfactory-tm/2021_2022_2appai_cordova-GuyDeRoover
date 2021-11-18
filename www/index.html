@@ -29,8 +29,8 @@
     <!-- Fixed sideNav -->
     <ul id="nav-mobile" class="sidenav">
         <li><a href="#!" data-show="tabWallpaper"><i class="material-icons"><img src="icon/picture.png" alt="Picture"></i>Search</a></li>
-        <li><a href="#!" data-show="tabSaved"><i class="material-icons"><img src="icon/heart.png" alt="Favorite"></i>Favorites</a></li>
-        <li><a href="#!" data-show="tabPrint"><i class="material-icons"><img src="icon/printer.png" alt="Print"></i>Print</a></li>
+        <li><a href="#!" data-show="tabFavorite"><i class="material-icons"><img src="icon/heart.png" alt="Favorite"></i>Favorites</a></li>
+        <li><a href="#!" data-show="tabSetting"><i class="material-icons"><img src="icon/printer.png" alt="Setting"></i>Setting</a></li>
         <li><a href="#!" data-show="tabInfo"><i class="material-icons"><img src="icon/info.png" alt="Info"></i>App Info</a></li>
     </ul>
 </header>
@@ -38,33 +38,31 @@
     <div class="container">
 
         <!-- Tab Main  -->
-        <div class="spa" id="tabWallpaper">
+        <div id="tabWallpaper" class="row spa">
             <div class="row">
-                <h5><img src="icon/picture.png" alt="wallpaper">Wallpapers</h5>
+                <div class="col s12 no-padding">
+                    <h5><img src="icon/picture.png" alt="wallpaper">Wallpapers</h5>
 
-                <div class="nav-wrapper inline">
-                    <div class=" input-field">
-                        <input id="search-text" type="search" multiple placeholder="Search...">
-                        <label class="label-icon" for="search-text">
-                            <i class="material-icons">search</i></label>
-                        <i class="material-icons">close</i>
+                    <div class="nav-wrapper inline">
+                        <div class=" input-field">
+                            <input id="search-text" type="search" multiple placeholder="Search...">
+                            <label class="label-icon" for="search-text">
+                                <i class="material-icons">search</i></label>
+                            <i class="material-icons">close</i>
+                        </div>
+                    </div>
+                    <div>
+                        <button id="general" class="col s3 btn-small green">General</button>
+                        <button id="anime" class=" col s3 btn-small green">Anime</button>
+                        <button id="people" class="col s3 btn-small green">People</button>
+                        <button id="search" class="col s3 btn-small right orange">Search</button>
                     </div>
                 </div>
-                <div>
-                    <button id="general" class="col s3 btn-small green">General</button>
-                    <button id="anime" class=" col s3 btn-small green">Anime</button>
-                    <button id="people" class="col s3 btn-small green">People</button>
-                    <button id="search" class="col s3 btn-small right orange">Search</button>
-                </div>
-            </div>
-
-            <div class="row">
-                <button id="test" class=" col s12 btn-small blue">Test knop!</button>
             </div>
 
             <div class="row">
                 <!-- Element met alle wallpapers die werden gevonden -->
-                <div class="col s12 no-padding" id="wallpapers"></div>
+                <div id="wallpapers"></div>
             </div>
 
             <div id="pag" class="center-align">
@@ -81,35 +79,25 @@
         </div>
 
         <!-- Tab Favorites -->
-        <div class="row spa" id="tabSaved">
-            <div class="col s12">
-                <h5><img src="icon/heart.png" alt="save">Favorites</h5>
-            </div>
+        <div id="tabFavorite" class="row spa">
+            <h5><img src="icon/heart.png" alt="favorite">Favorites</h5>
 
             <div class="row">
-                <div class="col s12 no-padding">
-                    <!-- Dummy task-->
-                    <ul id="favorites" class="collection">
-                        <li class="collection-item avatar">
-                            <i class="material-icons circle red deleteTask" data-task="0">delete_forever</i>
-                            <div class="title" data-task="0" contenteditable>${url}</div>
-                        </li>
-                    </ul>
-                </div>
+                <!-- Element met alle opgeslagen favorieten -->
+                <div id="favorites"></div>
             </div>
-
         </div>
 
-        <!-- Tab Print -->
-        <div class="row spa" id="tabPrint">
-           <div class="col s12">
-               <h5><img src="icon/printer.png" alt="print">Print wallpapers</h5>
-           </div>
+        <!-- Tab Settings -->
+        <div id="tabSetting" class="row spa">
+            <div class="col s12 no-padding">
+                <h5><img src="icon/printer.png" alt="settings">Setting wallpapers</h5>
+            </div>
         </div>
 
         <!-- Tab Info -->
-        <div class="row spa" id="tabInfo">
-            <div class="col s12">
+        <div id="tabInfo" class="row spa">
+            <div class="col s12 no-padding">
                 <h5><img src="icon/info.png" alt="info">Information</h5>
                 <p><b>Last name: </b>De Roover</p>
                 <p><b>First name: </b>Guy</p>
@@ -130,7 +118,7 @@
 <script src="cordova.js"></script>
 <script src="js/main.js"></script>
 <script src="js/favorite.js"></script>
-<script src="js/print.js"></script>
+<script src="js/setting.js"></script>
 <script src="js/info.js"></script>
 <script defer src="js/app.js"></script>
 </body>
