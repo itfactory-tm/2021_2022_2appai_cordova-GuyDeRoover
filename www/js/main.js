@@ -260,6 +260,6 @@ let Main = function() {
 
     return {
         init: init,
-        //remakeUrl:remakeUrl,
+        remakeUrl:remakeUrl,
     };
 }();

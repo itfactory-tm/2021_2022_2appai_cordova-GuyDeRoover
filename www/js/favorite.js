@@ -10,12 +10,8 @@ const Favorite = function () {
         $('#favorites').empty(); //remove all li tags
         _favorites.forEach(function (value, key) {
             //console.log(value , key)
-
-            //const previewUrl = Main.remakeUrl(value);
-            //Maak van de full size link een tweede link naar de preview size image
-            const newUrl = value.replace('w', 'th').replace('full', 'lg').replace('wallhaven-', '');
-            const pos = newUrl.lastIndexOf('.');
-            const previewUrl = newUrl.substring(0,pos) + '.jpg';
+            //Maak URL voor preview van de full image URL
+            const previewUrl = Main.remakeUrl(value);
 
             const item = `<div class="col s12 no-padding">
                              <div class="card">
@@ -31,7 +27,6 @@ const Favorite = function () {
                                 </div>
                              </div>
                           </div>`;
-
             $('#favorites').append(item);
         });
     };
@@ -53,9 +48,7 @@ const Favorite = function () {
             _favorites.push(`${value}`); //add the url at the end (push) or in front (unshift) of the array
             _setLocalStorage();
             alert('Wallpaper saved in favorites ♥');
-
         }
-
     };
 
     const deleteFavorite = function (id) {
@@ -64,8 +57,6 @@ const Favorite = function () {
             _setLocalStorage();
         }
     };
-
-
 
     return {
         init: init,

@@ -25,6 +25,4 @@ function onDeviceReady() {
     Main.init();
     Favorite.init();
     Setting.init();
-    Info.init();
-
 }
