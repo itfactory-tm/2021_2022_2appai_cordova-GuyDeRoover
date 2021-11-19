@@ -28,9 +28,9 @@
     </div>
     <!-- Fixed sideNav -->
     <ul id="nav-mobile" class="sidenav">
-        <li><a href="#!" data-show="tabWallpaper"><i class="material-icons"><img src="icon/picture.png" alt="Picture"></i>Search</a></li>
+        <li><a href="#!" data-show="tabWallpaper"><i class="material-icons"><img src="icon/search.png" alt="Picture"></i>Search</a></li>
         <li><a href="#!" data-show="tabFavorite"><i class="material-icons"><img src="icon/heart.png" alt="Favorite"></i>Favorites</a></li>
-        <li><a href="#!" data-show="tabSetting"><i class="material-icons"><img src="icon/printer.png" alt="Setting"></i>Setting</a></li>
+        <li><a href="#!" data-show="tabSetting"><i class="material-icons"><img src="icon/setting.png" alt="Setting"></i>Setting</a></li>
         <li><a href="#!" data-show="tabInfo"><i class="material-icons"><img src="icon/info.png" alt="Info"></i>App Info</a></li>
     </ul>
 </header>
@@ -38,10 +38,10 @@
     <div class="container">
 
         <!-- Tab Main  -->
-        <div id="tabWallpaper" class="row spa">
+        <div id="tabWallpaper" class="spa">
             <div class="row">
                 <div class="col s12 no-padding">
-                    <h5><img src="icon/picture.png" alt="wallpaper">Wallpapers</h5>
+                    <h5><img src="icon/search.png" alt="wallpaper">Wallpapers</h5>
 
                     <div class="nav-wrapper inline">
                         <div class=" input-field">
@@ -79,9 +79,12 @@
         </div>
 
         <!-- Tab Favorites -->
-        <div id="tabFavorite" class="row spa">
-            <h5><img src="icon/heart.png" alt="favorite">Favorites</h5>
-
+        <div id="tabFavorite" class="spa">
+            <div class="row">
+                <div class="col s12">
+                    <h5><img src="icon/heart.png" alt="favorite">Favorites</h5>
+                </div>
+            </div>
             <div class="row">
                 <!-- Element met alle opgeslagen favorieten -->
                 <div id="favorites"></div>
@@ -89,9 +92,20 @@
         </div>
 
         <!-- Tab Settings -->
-        <div id="tabSetting" class="row spa">
-            <div class="col s12 no-padding">
-                <h5><img src="icon/printer.png" alt="settings">Setting wallpapers</h5>
+        <div id="tabSetting" class="spa">
+            <div class="row">
+                <div class="col s12 no-padding">
+                    <h5><img src="icon/setting.png" alt="settings">Wallpaper settings</h5>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12 no-padding">
+                    <h5><img src="icon/age-limit.png" alt="18+">Purity filter:</h5>
+                    <button id="sfw" class="col s4 btn-large green">SFW</button>
+                    <button id="sketchy" class=" col s4 btn-large orange off">Sketchy</button>
+                    <button id="nsfw" class="col s4 btn-large red off">NSFW</button>
+                </div>
             </div>
         </div>
 
