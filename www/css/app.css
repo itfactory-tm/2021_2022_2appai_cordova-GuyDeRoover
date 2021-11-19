@@ -23,7 +23,7 @@ main h5 img {
     width: 3.5rem;
     margin-right: 20px;
 }
-/*Main*/
+/*Main + Favorite */
 .btn-fav, .btn-delete {
     right: 120px !important;
 }
@@ -31,12 +31,6 @@ main h5 img {
 .btn-save {
     right: 72px !important;
 }
-
-/*Favorite*/
-
-/*Setting*/
-
-/*App Info*/
 
 .off {
     background-color: #dddddd !important;

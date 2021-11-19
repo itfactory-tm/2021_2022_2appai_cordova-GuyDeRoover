@@ -144,10 +144,11 @@ let Main = function() {
 
         //Herbruikbare function voor wallpapers weer te geven
         function show(page) {
+            navigator.splashscreen.show();
             //Slaag selector op in variabele voor hergebruik
             const wallpapers = $('#wallpapers');
             //Maak het #wallpapers element leeg bij elke nieuwe zoekactie en hide page tot alle wallpapers geladen zijn
-            wallpapers.empty().hide();
+            wallpapers.empty();
             //waarde optellen voor categories
             const categories = general+anime+people;
             //waarde optellen voor purity
@@ -232,8 +233,11 @@ let Main = function() {
                     show(pageNumber);
                 }
             });
-            //Laat wallpapers pas zien wanneer alles geladen is
-            wallpapers.show();
+
+            //Delay op splashscreen
+            setTimeout(function() {
+                navigator.splashscreen.hide();
+            }, 1000);
         }
 
         $(document).ready(function () {

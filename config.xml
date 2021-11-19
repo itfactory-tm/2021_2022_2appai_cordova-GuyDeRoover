@@ -23,10 +23,21 @@
         <icon density="xhdpi" src="resources/android/icon/drawable-xhdpi-icon.png" />
         <icon density="xxhdpi" src="resources/android/icon/drawable-xxhdpi-icon.png" />
         <icon density="xxxhdpi" src="resources/android/icon/drawable-xxxhdpi-icon.png" />
+        <splash density="land-hdpi" src="resources/android/screen/splash-land-hdpi.png" />
+        <splash density="land-ldpi" src="resources/android/screen/splash-land-ldpi.png" />
+        <splash density="land-mdpi" src="resources/android/screen/splash-land-mdpi.png" />
+        <splash density="land-xhdpi" src="resources/android/screen/splash-land-xhdpi.png" />
+        <splash density="land-xxhdpi" src="resources/android/screen/splash-land-xxhdpi.png" />
+        <splash density="land-xxxhdpi" src="resources/android/screen/splash-land-xxxhdpi.png" />
+        <splash density="port-hdpi" src="resources/android/screen/splash-port-hdpi.png" />
+        <splash density="port-ldpi" src="resources/android/screen/splash-port-ldpi.png" />
+        <splash density="port-mdpi" src="resources/android/screen/splash-port-mdpi.png" />
+        <splash density="port-xhdpi" src="resources/android/screen/splash-port-xhdpi.png" />
+        <splash density="port-xxhdpi" src="resources/android/screen/splash-port-xxhdpi.png" />
+        <splash density="port-xxxhdpi" src="resources/android/screen/splash-port-xxxhdpi.png" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
-
 </widget>
