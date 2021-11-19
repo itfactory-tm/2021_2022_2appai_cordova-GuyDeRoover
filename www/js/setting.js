@@ -1,4 +1,5 @@
 let Setting = function() {
+
     let init = function() {
 
     };

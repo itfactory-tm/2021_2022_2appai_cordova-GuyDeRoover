@@ -1,7 +1,7 @@
 let Main = function() {
-    const wallhavenUrl = "https://wallhaven.cc/api/v1/search"
-    //const wallhavenKey = "6NyKaLrzoDa8kgW7zw93aDZ40bpf1hhT"
-    //const searchwithAPI = `${wallhavenUrl}?apikey=${wallhavenKey}`
+    const wallhavenUrl = "https://wallhaven.cc/api/v1/search";
+    const wallhavenKey = "6NyKaLrzoDa8kgW7zw93aDZ40bpf1hhT";
+    const searchwithAPI = `${wallhavenUrl}?apikey=${wallhavenKey}`;
 
     //Maak van de full image link een tweede link naar de preview size image
     function remakeUrl(url) {
@@ -18,8 +18,13 @@ let Main = function() {
         let people = '1';
         const originalPagination = $('#pag').html();
 
+        //standaard waarden voor purity
+        let sfw = '1';
+        let sketchy = '0';
+        let nsfw = '0';
+
         //nakijken of er knoppen zijn enabled/disabled en waarden aanpassen
-        $('#general').click(function() {
+        $('#general').unbind().click(function() {
             if ($(this).hasClass('off')) {
                 //To do when enabling
                 general = '1';
@@ -30,7 +35,7 @@ let Main = function() {
                 $(this).addClass('off');
             }
         });
-        $('#anime').click(function() {
+        $('#anime').unbind().click(function() {
             if ($(this).hasClass('off')) {
                 anime = '1';
                 $(this).removeClass('off');
@@ -39,12 +44,42 @@ let Main = function() {
                 $(this).addClass('off');
             }
         });
-        $('#people').click(function() {
+        $('#people').unbind().click(function() {
             if ($(this).hasClass('off')) {
                 people = '1';
                 $(this).removeClass('off');
             } else {
                 people = '0';
+                $(this).addClass('off');
+            }
+        });
+
+        $('#sfw').unbind().click(function() {
+            if ($(this).hasClass('off')) {
+                //To do when enabling
+                sfw = '1';
+                $(this).removeClass('off');
+            } else {
+                //To do when disabling
+                sfw = '0';
+                $(this).addClass('off');
+            }
+        });
+        $('#sketchy').unbind().click(function() {
+            if ($(this).hasClass('off')) {
+                sketchy = '1';
+                $(this).removeClass('off');
+            } else {
+                sketchy = '0';
+                $(this).addClass('off');
+            }
+        });
+        $('#nsfw').unbind().click(function() {
+            if ($(this).hasClass('off')) {
+                nsfw = '1';
+                $(this).removeClass('off');
+            } else {
+                nsfw = '0';
                 $(this).addClass('off');
             }
         });
@@ -111,27 +146,29 @@ let Main = function() {
         function show(page) {
             //Slaag selector op in variabele voor hergebruik
             const wallpapers = $('#wallpapers');
-            //Maak het #wallpapers element leeg bij elke nieuwe zoekactie en hide page tot alles geladen is
+            //Maak het #wallpapers element leeg bij elke nieuwe zoekactie en hide page tot alle wallpapers geladen zijn
             wallpapers.empty().hide();
             //waarde optellen voor categories
             const categories = general+anime+people;
+            //waarde optellen voor purity
+            const purity = sfw+sketchy+nsfw;
 
             //Maak een JSON-object met alle parameters
             const pars = {
                 q: $('#search-text').val(), //q = query parameter for tagnames, id, @username, type, etc.
                 categories: categories, //general,anime,people => 1 is on, 0 is off
-                purity: '100', //sfw,sketchy,nsfw => 1 is on, 0 is off (nsfw enkel met API key)
-                page: page,
+                purity: purity, //sfw,sketchy,nsfw => 1 is on, 0 is off (nsfw enkel met API key)
+                page: page, //no page results in page 1
             };
 
             //Toon URL met query parameters in console
-            console.log('API call:', `${wallhavenUrl}?${$.param(pars)}`)
+            //console.log('API call:', `${wallhavenUrl}?${$.param(pars)}`);
 
-            // Main MET API Key + static filters:
-            //$.getJSON(searchwithAPI, pars, function (data) {
+            //Main MET API Key + custom filters:
+            $.getJSON(searchwithAPI, pars, function (data) {
 
-            //Main ZONDER API Key + custom filters:
-            $.getJSON(wallhavenUrl, pars, function (data) {
+            //Main ZONDER API Key:
+            //$.getJSON(wallhavenUrl, pars, function (data) {
                 $.each(data, function (index, value) {
 
                     //Variabele met de current page
@@ -195,7 +232,7 @@ let Main = function() {
                     show(pageNumber);
                 }
             });
-            //Laat elementen zien wanneer alles is geladen
+            //Laat wallpapers pas zien wanneer alles geladen is
             wallpapers.show();
         }
 
@@ -260,6 +297,6 @@ let Main = function() {
 
     return {
         init: init,
-        remakeUrl:remakeUrl,
+        remakeUrl: remakeUrl,
     };
 }();

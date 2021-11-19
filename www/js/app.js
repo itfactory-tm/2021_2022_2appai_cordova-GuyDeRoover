@@ -11,11 +11,11 @@ $(function(){
     });
 
     function onOffline() {
-        alert('Lost internet connection!')
+        alert('Lost internet connection!');
     }
 
     $('#favorites').on('click', '.btn-delete', function () {
-        const id = $(this).data('task'); //id = value x from data-task="x"
+        const id = $(this).data('favorite'); //id = value x from data-favorite="x"
         Favorite.deleteFavorite(id);
     })
 });
@@ -25,4 +25,10 @@ function onDeviceReady() {
     Main.init();
     Favorite.init();
     Setting.init();
+
+
+
+
+
+
 }

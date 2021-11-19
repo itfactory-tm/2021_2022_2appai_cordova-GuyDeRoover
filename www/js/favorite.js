@@ -17,7 +17,7 @@ const Favorite = function () {
                              <div class="card">
                                 <div class="card-image">
                                     <img class="favorite preview" src="${previewUrl}" alt="preview" data-fullUrl="${value}" role="button">
-                                    <a class="btn-delete btn-floating halfway-fab waves-effect waves-light red" role="button" data-task="${key}"><i class="material-icons">delete_forever</i></a>
+                                    <a class="btn-delete btn-floating halfway-fab waves-effect waves-light red" role="button" data-favorite="${key}"><i class="material-icons">delete_forever</i></a>
                                     <a class="btn-save btn-floating halfway-fab waves-effect waves-light green" role="button"><i class="material-icons">file_download</i></a>
                                     <a class="btn-set btn-floating halfway-fab waves-effect waves-light green" role="button"><i class="material-icons">wallpaper</i></a>
                                     <span class="card-title">${key+1}</span>
