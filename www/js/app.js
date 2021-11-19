@@ -24,11 +24,4 @@ function onDeviceReady() {
     //console.log('Device is ready');
     Main.init();
     Favorite.init();
-    Setting.init();
-
-
-
-
-
-
 }
