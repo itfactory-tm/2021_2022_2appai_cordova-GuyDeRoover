@@ -4,32 +4,34 @@
 - **Class**: 2APPAI 02
 - **Email**: <a href="mailto:r0781424@student.thomasmore.be">r0781424@student.thomasmore.be</a>
 - **Student number**: r0781424
-- **APK download URL**: ......
+- **APK download URL**: https://guyderoover.sinners.be/wallmania/assets/apk/De_Roover_Guy_2APPAI_02.zip
 
 ![Link to your profile photo](https://i.ibb.co/F7W6nhS/profiel.jpg)
 
 ## Short description of your app
 
-The idea is the create an application that gives you the possibility to choose from a wide range of wallpapers.
-The wallpapers are from wallhavens database (see API down below).
-You will be able to sort and search wallpapers by name or tags.
-If you find a wallpaper that you like you can set it as your phones background with a single press of a button.
-If there are certain wallpapers that you really like, you can mark them as favorite so they won't get lost.
-The wallpapers marked as favorite will be put in local storage so you can always use those wallpapers even without internet.
-You will also be able to create your own custom wallpapers by taking pictures with you camera.
-If you would wanna print a certain wallpaper to hang in your room for example, then you can do that too. 
-One tab will be used to look for wallpapers, one tab for your saved wallpapers and the last tab to change settings, create wallpapers, print, etc.
+This is an Android-only application. With this application, you are able to search for wallpapers based on certain criteria. Wallpapers can be found based on tag, category and purity. The purity filter is default set on "SFW" (Safe For Work) but can be changed in the settings. <br><br>
+Every wallpaper can be set as the device's home screen and lock screen background, can be downloaded locally, or saved in favorites inside the application for later use with local storage. Not all wallpapers show the full wallpaper in the preview so there is an option for opening the full wallpaper in Picasso preview by simply clicking on the wallpaper itself. The preview also gives you the option to share the wallpapers with others through email or other sorts of media sharing platforms. <br><br>
+If you wish to delete a saved background from your favorites, change your background from your saved favorites or rather download the picture to the device from the favorites tab, then this is possible as well. <br>
+
 
 API used to find wallpapers: https://wallhaven.cc/help/api
 
 ## Plugins used
 
-Plugin to show selected wallpaper in full size:
-https://ionicframework.com/docs/native/full-screen-image.
-Plugin to print a certain wallpaper:
-https://ionicframework.com/docs/native/printer.
-Plugin to create your own custom wallpapers:
-https://www.npmjs.com/package/cordova-plugin-konnect-camera.
+Plugin to show selected wallpaper in full size fitting to the screen size in Picasso view from a URL, with sharing options through several media platforms:
+https://github.com/sarriaroman/photoviewer <br>
+Plugin to write an image to the devices library from a URL:
+https://github.com/apache/cordova-plugin-file-transfer <br>
+Plugin to set the wallpaper using a base64 string:
+https://github.com/fbsanches/cordova-plugin-wallpaper <br>
+Plugin that passes the device information to cordova-plugin-file to know the type of device:
+https://cordova.apache.org/docs/en/10.x/reference/cordova-plugin-device/ <br>
+Plugin to know the network information status, so if there is no internet there will be a alert showing up that the device has lost internet connection:
+https://cordova.apache.org/docs/en/10.x/reference/cordova-plugin-network-information/ <br>
+Plugin to show a splashscreen when loading the images:
+https://cordova.apache.org/docs/en/10.x/reference/cordova-plugin-splashscreen/ <br>
+
 
 
 ## Tip: GitHub Markdown
