@@ -10,6 +10,56 @@ let Main = function() {
         return newUrl.substring(0, pos) + '.jpg';
     }
 
+    //Herbruikbare function om een wallpaper te downloaden
+    function DownloadToDevice(fileurl) {
+        let blob = null;
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", fileurl);
+        xhr.responseType = "blob"; //force the HTTP response, response-type header to be blob
+        xhr.onload = function () {
+            blob = xhr.response; //xhr.response is now a blob object
+            //console.log(blob);
+            let storageLocation = 'file:///storage/emulated/0/';
+            const folderpath = storageLocation + "Download";
+            //Creëer 4 random integers
+            function rndInt() {
+                return Math.floor(1000 + Math.random() * 9000)
+            }
+            const filename = "Wallmania"+rndInt()+"-"+rndInt()+"-"+rndInt()+".png";
+            const DataBlob = blob;
+            window.resolveLocalFileSystemURL(folderpath, function (dir) {
+                dir.getFile(filename, {
+                    create: true
+                }, function (file) {
+                    file.createWriter(function (fileWriter) {
+                        fileWriter.write(DataBlob);
+                        //Download was succesfull
+                        alert('Wallpaper has been downloaded!');
+                    }, function (err) {
+                        // Failed
+                        alert('Error, file could not be downloaded!')
+                    });
+                });
+            });
+        };
+        xhr.send();
+    }
+
+    //Herbruikbare function om van image URL een base64 te maken
+    function toDataURL(url, callback) {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+            const reader = new FileReader();
+            reader.onloadend = function() {
+                callback(reader.result);
+            }
+            reader.readAsDataURL(xhr.response);
+        };
+        xhr.open('GET', url);
+        xhr.responseType = 'blob';
+        xhr.send();
+    }
+
     let init = function() {
 
         //standaard waarden voor categories
@@ -23,7 +73,7 @@ let Main = function() {
         let sketchy = '0';
         let nsfw = '0';
 
-        //nakijken of er knoppen zijn enabled/disabled en waarden aanpassen
+        //Knoppen voor filter op wallpaper page => categorieën
         $('#general').unbind().click(function() {
             if ($(this).hasClass('off')) {
                 //To do when enabling
@@ -54,6 +104,7 @@ let Main = function() {
             }
         });
 
+        //Knoppen voor settings page => purity filter, werkt enkel met API key
         $('#sfw').unbind().click(function() {
             if ($(this).hasClass('off')) {
                 //To do when enabling
@@ -76,71 +127,22 @@ let Main = function() {
         });
         $('#nsfw').unbind().click(function() {
             if ($(this).hasClass('off')) {
-                nsfw = '1';
-                $(this).removeClass('off');
-            } else {
+                switch (confirm('This will enable "NOT SAFE FOR WORK" content.\nDo you want to proceed?')) {
+                    case true:
+                        nsfw = '1';
+                        $(this).removeClass('off');
+                        alert('You entered the danger zone!');
+                        break;
+                    case false:
+                        alert('You stayed in the safe zone!');
+                }
+            }
+            else {
+                alert('Back in the safe zone!')
                 nsfw = '0';
                 $(this).addClass('off');
             }
         });
-
-        //Herbruikbare function om een wallpaper te downloaden
-        function DownloadToDevice(fileurl) {
-            let blob = null;
-            const xhr = new XMLHttpRequest();
-            xhr.open("GET", fileurl);
-            xhr.responseType = "blob"; //force the HTTP response, response-type header to be blob
-            xhr.onload = function () {
-                blob = xhr.response; //xhr.response is now a blob object
-                //console.log(blob);
-                let storageLocation = "";
-                switch (device.platform) {
-                    case "Android":
-                        storageLocation = 'file:///storage/emulated/0/';
-                        break;
-                    case "iOS":
-                        storageLocation = cordova.file.documentsDirectory;
-                        break;
-                }
-                const folderpath = storageLocation + "Download";
-                //Creëer 4 random integers
-                function rndInt() {
-                    return Math.floor(1000 + Math.random() * 9000)
-                }
-                const filename = "Wallmania"+rndInt()+"-"+rndInt()+"-"+rndInt()+".png";
-                const DataBlob = blob;
-                window.resolveLocalFileSystemURL(folderpath, function (dir) {
-                    dir.getFile(filename, {
-                        create: true
-                    }, function (file) {
-                        file.createWriter(function (fileWriter) {
-                            fileWriter.write(DataBlob);
-                            //Download was succesfull
-                            alert('Wallpaper has been downloaded!');
-                        }, function (err) {
-                            // Failed
-                            alert('Error, file could not be downloaded!')
-                        });
-                    });
-                });
-            };
-            xhr.send();
-        }
-
-        //Herbruikbare function om van image URL een base64 te maken
-        function toDataURL(url, callback) {
-            const xhr = new XMLHttpRequest();
-            xhr.onload = function() {
-                const reader = new FileReader();
-                reader.onloadend = function() {
-                    callback(reader.result);
-                }
-                reader.readAsDataURL(xhr.response);
-            };
-            xhr.open('GET', url);
-            xhr.responseType = 'blob';
-            xhr.send();
-        }
 
         //Herbruikbare function voor wallpapers weer te geven
         function show(page) {
@@ -150,9 +152,15 @@ let Main = function() {
             //Maak het #wallpapers element leeg bij elke nieuwe zoekactie en hide page tot alle wallpapers geladen zijn
             wallpapers.empty();
             //waarde optellen voor categories
-            const categories = general+anime+people;
+            let categories = general+anime+people;
+            if (categories === '000') {
+             categories = '111';
+            }
             //waarde optellen voor purity
-            const purity = sfw+sketchy+nsfw;
+            let purity = sfw+sketchy+nsfw;
+            if (purity === '000') {
+                purity = '100';
+            }
 
             //Maak een JSON-object met alle parameters
             const pars = {
@@ -208,9 +216,9 @@ let Main = function() {
                                     <div class="card-image">
                                         <img id="${[i]}" class="preview" src="${remakeUrl(fullUrl)}" alt="preview" data-fullUrl="${fullUrl}" role="button">
                                         <span class="card-title">${category}</span>
-                                        <a class="btn-fav btn-floating halfway-fab waves-effect waves-light green" role="button"><i class="material-icons">favorite_border</i></a>
-                                        <a class="btn-save btn-floating halfway-fab waves-effect waves-light green" role="button"><i class="material-icons">file_download</i></a>
-                                        <a class="btn-set btn-floating halfway-fab waves-effect waves-light green" role="button"><i class="material-icons">wallpaper</i></a>
+                                        <a class="btn-fav btn-floating halfway-fab waves-effect waves-light color" role="button"><i class="material-icons">favorite_border</i></a>
+                                        <a class="btn-save btn-floating halfway-fab waves-effect waves-light color" role="button"><i class="material-icons">file_download</i></a>
+                                        <a class="btn-set btn-floating halfway-fab waves-effect waves-light color" role="button"><i class="material-icons">wallpaper</i></a>
                                     </div>
                                     <div class="card-content">
                                         <p>${resolution}</p>
@@ -226,10 +234,10 @@ let Main = function() {
             //Pagination
             $('ul.pagination').children('li.waves-effect').unbind().click(function () {
                 const pageNumber = $(this).children('a')[0].innerText;
-                const activePage = document.getElementsByClassName('active', 'green')[1];
+                const activePage = document.getElementsByClassName('active', 'color-1')[1];
                 if (pageNumber >= 1 && pageNumber <= 5) {
-                    activePage.classList.remove('active', 'green');
-                    $(this).addClass('active'); $(this).addClass('green');
+                    activePage.classList.remove('active', 'color');
+                    $(this).addClass('active'); $(this).addClass('color');
                     show(pageNumber);
                 }
             });

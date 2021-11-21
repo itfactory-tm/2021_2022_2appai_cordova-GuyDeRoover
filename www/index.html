@@ -17,7 +17,7 @@
 <header>
     <!-- Fixed navbar -->
     <div class="navbar-fixed">
-        <nav class="green">
+        <nav class="color">
             <div class="nav-wrapper container ">
                 <a href="#!" class="brand-logo center">Wallmania</a>
                 <a href="#!" data-target="nav-mobile" class="sidenav-trigger show-on-large">
@@ -39,26 +39,35 @@
 
         <!-- Tab Main  -->
         <div id="tabWallpaper" class="spa">
-            <div class="row">
+            <div class="row mb-2">
                 <div class="col s12 no-padding">
-                    <h5><img src="icon/search.png" alt="wallpaper">Wallpapers</h5>
+                    <h3><img src="icon/search.png" alt="search">Wallpapers</h3>
+                </div>
+            </div>
 
+            <div class="row mb-1">
+                <div class="col s12 no-padding">
+                    <div id="category">
+                        <button id="general" class="col s3 btn-small color">General</button>
+                        <button id="anime" class=" col s3 btn-small color">Anime</button>
+                        <button id="people" class="col s3 btn-small color">People</button>
+                        <button id="search" class="col s3 btn-small right">Search</button>
+                    </div>
+                </div>
+            </div>
+            <div class="box-outside row mb-1 mt-2">
+                <div class="box-inside col s12 no-padding">
                     <div class="nav-wrapper inline">
-                        <div class=" input-field">
+                        <div class="input-field m-1">
                             <input id="search-text" type="search" multiple placeholder="Search...">
                             <label class="label-icon" for="search-text">
                                 <i class="material-icons">search</i></label>
                             <i class="material-icons">close</i>
                         </div>
                     </div>
-                    <div>
-                        <button id="general" class="col s3 btn-small green">General</button>
-                        <button id="anime" class=" col s3 btn-small green">Anime</button>
-                        <button id="people" class="col s3 btn-small green">People</button>
-                        <button id="search" class="col s3 btn-small right orange">Search</button>
-                    </div>
                 </div>
             </div>
+
 
             <div class="row">
                 <!-- Element met alle wallpapers die werden gevonden -->
@@ -68,7 +77,7 @@
             <div id="pag" class="center-align">
                 <ul class="pagination">
                     <li class="disabled"><a><i class="material-icons">chevron_left</i></a></li>
-                    <li class="waves-effect active green"><a>1</a></li>
+                    <li class="waves-effect active color"><a>1</a></li>
                     <li class="waves-effect"><a>2</a></li>
                     <li class="waves-effect"><a>3</a></li>
                     <li class="waves-effect"><a>4</a></li>
@@ -80,9 +89,10 @@
 
         <!-- Tab Favorites -->
         <div id="tabFavorite" class="spa">
-            <div class="row">
+
+            <div class="row mb-2">
                 <div class="col s12">
-                    <h5><img src="icon/heart.png" alt="favorite">Favorites</h5>
+                    <h3><img src="icon/heart.png" alt="favorite">Favorites</h3>
                 </div>
             </div>
             <div class="row">
@@ -93,36 +103,54 @@
 
         <!-- Tab Settings -->
         <div id="tabSetting" class="spa">
+
             <div class="row">
-                <div class="col s12 no-padding">
-                    <h5><img src="icon/setting.png" alt="settings">Wallpaper settings</h5>
+                <div class="col s12">
+                    <h3><img src="icon/setting.png" alt="settings">Settings</h3>
+                </div>
+            </div>
+            
+            <div class="row pb-0">
+                <div class="col s12">
+                    <h5>Purity filter for&nbsp;<img src="icon/age-limit.png" alt="18+">&nbsp;only:</h5>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col s12 no-padding">
-                    <h5><img src="icon/age-limit.png" alt="18+">Purity filter:</h5>
-                    <button id="sfw" class="col s4 btn-large green">SFW</button>
-                    <button id="sketchy" class=" col s4 btn-large orange off">Sketchy</button>
-                    <button id="nsfw" class="col s4 btn-large red off">NSFW</button>
+                <div id="purity">
+                    <button id="sfw" class="col s4 btn-large">SFW</button>
+                    <button id="sketchy" class=" col s4 btn-large off">Sketchy</button>
+                    <button id="nsfw" class="col s4 btn-large off">NSFW</button>
                 </div>
             </div>
+
         </div>
 
+
         <!-- Tab Info -->
-        <div id="tabInfo" class="row spa">
-            <div class="col s12 no-padding">
-                <h5><img src="icon/info.png" alt="info">Information</h5>
-                <p><b>Last name: </b>De Roover</p>
-                <p><b>First name: </b>Guy</p>
-                <p><b>Class: </b> 2 APPAI 02</p>
-                <p><b>Student id: </b>r0781424</p>
-                <p><b>Email: </b> <a
-                        href="mailto:r0781424@student.thomasmore.be">r0781424@student.thomasmore.be</a></p>
-                <p><b>Phone number: </b>
-                    <a href="tel:+32494043790">+324 94 04 37 90</a></p>
-                <p><b>What is this app? </b><br>Nog in te vullen??????</p>
+        <div id="tabInfo" class="spa">
+            <div class="row mb-2">
+                <div class="col s12 no-padding">
+                    <h3><img src="icon/info.png" alt="info">Information</h3>
+                </div>
             </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <p><b>Last name: </b>De Roover</p>
+                    <p><b>First name: </b>Guy</p>
+                    <p><b>Class: </b> 2 APPAI 02</p>
+                    <p><b>Student id: </b>r0781424</p>
+                    <p><b>Email: </b> <a
+                            href="mailto:r0781424@student.thomasmore.be">r0781424@student.thomasmore.be</a></p>
+                    <p><b>Phone number: </b>
+                        <a href="tel:+32494043790">+324 94 04 37 90</a></p>
+                    <p><b>What is this app?</b><br>This is an Android only application. With this application you are able to search for wallpapers based on certain criteria. Wallpapers can be found based on tag, category and purity. The purity filter is default set on "SFW" (Safe For Work).
+                    Every wallpaper can be set as home screen and lock screen background on the device, can be downloaded locally or saved in favorites inside the application for later use. Not all wallpapers show the full wallpaper in the preview so there is an option for opening the full wallpaper Picasso preview by simply clicking on the wallpaper itself. The preview also gives you the option to share the wallpapers with others.
+                        If you wish to delete a saved background from your favorites, change your background from your saved favorites or rather download the picture to the device from the favorites tab, then this is completely possible as well.</p>
+                </div>
+            </div>
+
         </div>
 
     </div>
