@@ -4,7 +4,7 @@
 - **Class**: 2APPAI 02
 - **Email**: <a href="mailto:r0781424@student.thomasmore.be">r0781424@student.thomasmore.be</a>
 - **Student number**: r0781424
-- **APK download URL**: https://guyderoover.sinners.be/wallmania/assets/apk/app-debug.apk
+- **APK download URL**: https://guyderoover.sinners.be/wallmania/
 
 ![Link to your profile photo](https://i.ibb.co/F7W6nhS/profiel.jpg)
 
